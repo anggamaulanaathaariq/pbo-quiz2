@@ -1,22 +1,30 @@
 package anggamaulana;
-import static java.lang.reflect.Array.getLength;
-import javax.swing.*;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 /**
  *
  * @author Angga Maulana A
  */
 public class Transaksiframe extends javax.swing.JFrame {
-
+    public String name;
+    public String harga;
+    public String jumlah;
+    
+    DefaultTableModel tabel = new DefaultTableModel();
     /**
      * Creates new form Transaksiframe
      */
     public Transaksiframe() {
         initComponents();
+        tblBarang.setModel(tabel);
+        tabel.addColumn("Nama");
+        tabel.addColumn("Harga");
+        tabel.addColumn("Jumlah");
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,14 +39,14 @@ public class Transaksiframe extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         item = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        JumlahBrg = new javax.swing.JTextField();
         tambah = new javax.swing.JButton();
         ganti = new javax.swing.JButton();
         baru = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         getLength = new javax.swing.JTextPane();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblBarang = new javax.swing.JTable();
         simpan = new javax.swing.JButton();
         batal = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -62,9 +70,9 @@ public class Transaksiframe extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        JumlahBrg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                JumlahBrgActionPerformed(evt);
             }
         });
 
@@ -91,7 +99,7 @@ public class Transaksiframe extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(getLength);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblBarang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -110,9 +118,14 @@ public class Transaksiframe extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tblBarang);
 
         simpan.setText("Save");
+        simpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                simpanActionPerformed(evt);
+            }
+        });
 
         batal.setText("Cancel");
         batal.addActionListener(new java.awt.event.ActionListener() {
@@ -141,13 +154,13 @@ public class Transaksiframe extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(batal))
+                                .addComponent(simpan, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(batal, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(item, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(JumlahBrg, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +183,7 @@ public class Transaksiframe extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tambah)
                     .addComponent(item, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JumlahBrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,9 +218,10 @@ public class Transaksiframe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_gantiActionPerformed
     
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void JumlahBrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JumlahBrgActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        
+    }//GEN-LAST:event_JumlahBrgActionPerformed
 
     private void batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalActionPerformed
         // TODO add your handling code here:
@@ -215,7 +229,32 @@ public class Transaksiframe extends javax.swing.JFrame {
 
     private void tambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahActionPerformed
         // TODO add your handling code here:
+        String nama = (String) item.getSelectedItem();
+        String jumlah =(String) JumlahBrg.getSelectedText();
+//        tblBarang.add(new Object[]nama, barang.getHarga(), 129)); 
+//        String[] data = new String[5];
+//        String name;
+//        double harga, jumlah;
+//        
+//        data[0]=
+//        
+//        tabel.addRow(new Object[]{
+//            
+//            item.getAction(),
+//            item.getAction(),
+//            item.getAction(),
+////            tblBarang.setModel((TableModel) item.getAction())
+//        });
     }//GEN-LAST:event_tambahActionPerformed
+
+    private void simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanActionPerformed
+        // TODO add your handling code here:
+        StringBuilder sb = new StringBuilder();
+        sb.append("Kode: ").append(getLength.add(getLength));
+        sb.append("Detail Belanja: ").append(item.add(getLength));
+        //sb.append("Total: ").append()
+        JOptionPane.showMessageDialog(this, sb, "Detail Pembayaran", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_simpanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,6 +292,7 @@ public class Transaksiframe extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField JumlahBrg;
     private javax.swing.JButton baru;
     private javax.swing.JButton batal;
     private javax.swing.JButton ganti;
@@ -266,10 +306,9 @@ public class Transaksiframe extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton simpan;
     private javax.swing.JButton tambah;
+    private javax.swing.JTable tblBarang;
     // End of variables declaration//GEN-END:variables
 
     private static class randomGenerator {
