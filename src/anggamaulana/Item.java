@@ -11,13 +11,20 @@ package anggamaulana;
  */
 public class Item {
     private String name;
-    private String harga;
+    private double harga;
     private String jumlah;
 
-    public Item(String name, String harga, String jumlah) {
+    public Item(String name, int harga) {
         this.name = name;
         this.harga = harga;
-        this.jumlah = jumlah;
+    }
+    
+    @Override
+            public String toString(){
+                return this.name;
+            }
+
+    public Item() {
     }
 
     public String getName() {
@@ -28,11 +35,11 @@ public class Item {
         this.name = name;
     }
 
-    public String getHarga() {
+    public double getHarga() {
         return harga;
     }
 
-    public void setHarga(String harga) {
+    public void setHarga(double harga) {
         this.harga = harga;
     }
 
