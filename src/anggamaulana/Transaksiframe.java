@@ -12,6 +12,9 @@ import javax.swing.table.TableModel;
  */
 public class Transaksiframe extends javax.swing.JFrame {
     Item barang;
+    int code;
+    DateFormat dateFormat;
+    Date date;
     Transaksi penjualan = new Transaksi();
     DefaultTableModel tabel = new DefaultTableModel();
     /**
@@ -224,7 +227,7 @@ public class Transaksiframe extends javax.swing.JFrame {
 
     private void baruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruActionPerformed
         // TODO add your handling code here:
-        int code = 01;
+        code++;
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Date date = new Date();
         System.out.println(dateFormat.format(date));
@@ -282,10 +285,11 @@ public class Transaksiframe extends javax.swing.JFrame {
     private void simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanActionPerformed
         // TODO add your handling code here:
         StringBuilder sb = new StringBuilder();
-        sb.append("Kode: ").append(getCode.add(getCode));
+        sb.append("Kode: ").append(dateFormat.format(date)).append(String.format("%02d",code)).append("\n");
         sb.append("Detail Belanja: ").append(jnsBarang.add(getCode));
-        //sb.append("Total: ").append()
-        JOptionPane.showMessageDialog(null, sb, "Detail Pembayaran", JOptionPane.INFORMATION_MESSAGE);
+        sb.append("Total: ").append(penjualan.countsubTotal());
+        JOptionPane.showMessageDialog(null, sb, "Detail Transaksi",JOptionPane.INFORMATION_MESSAGE);
+        //JOptionPane.showMessageDialog(null,"cek");
     }//GEN-LAST:event_simpanActionPerformed
 
     /**

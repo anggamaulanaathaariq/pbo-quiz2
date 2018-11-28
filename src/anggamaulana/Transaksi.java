@@ -18,6 +18,7 @@ class Transaksi {
     public double countsubTotal(){
         subTotal = 0;
         for (int i =0;i<tabel.getRowCount();i++){
+            
             subTotal=subTotal+Double.parseDouble(tabel.getValueAt(i, 2).toString());
         }
         return subTotal;
