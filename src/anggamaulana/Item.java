@@ -7,10 +7,12 @@ import javax.swing.JComboBox;
  * @author Angga Maulana A
  */
 public class Item {
+    //Atribut class Item
     private String name;
     private double harga;
     private String jumlah;
 
+    //Constractor name harga 
     public Item(String name, double harga) {
         this.name = name;
         this.harga = harga;
@@ -20,7 +22,7 @@ public class Item {
             public String toString(){
                 return this.name;
             }
-
+    // Getter & Setter
     public Item() {
     }
 

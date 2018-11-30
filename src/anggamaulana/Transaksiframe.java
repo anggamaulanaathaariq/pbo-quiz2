@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import java.awt.event.KeyEvent;
 
 /**
  *
@@ -29,6 +28,11 @@ public class Transaksiframe extends javax.swing.JFrame {
         initComponents();
         fillComboBarang();
         tblBarang.setModel(penjualan.getTabel());
+        tbBarang.setEnabled(false);
+        jhBrg.setEnabled(false);
+        gntBrg.setEnabled(false);
+        simpan.setEnabled(false);
+        batal.setEnabled(false);
     }
     //Method Daftar Barang dan Harga
     private void fillComboBarang(){
@@ -39,11 +43,7 @@ public class Transaksiframe extends javax.swing.JFrame {
         jnsBarang.addItem(barang1);
         jnsBarang.addItem(barang2);
         jnsBarang.addItem(barang3);
-        
     }
-//    public boolean containsDuplicate(int[]x){
-//        
-//    }
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -236,20 +236,11 @@ public class Transaksiframe extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jnsBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jnsBarangActionPerformed
-
         barang = (Item)jnsBarang.getSelectedItem();
-
     }//GEN-LAST:event_jnsBarangActionPerformed
 
     private void baruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruActionPerformed
-
         // Atribut untuk mengeksekusi Code Tanggal 
-//        if (baru.getText().equals("New")){
-//            tbBarang.setEnabled(enable);
-//            getCode.setEnabled(false);
-//            jnsBarang.setEnabled(enable);
-//            jhBrg.setEnabled(enable);
-//            baru.setEnabled(false);
         code++;//menampilkan date format serta no pembelian
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Date date = new Date();
@@ -257,16 +248,17 @@ public class Transaksiframe extends javax.swing.JFrame {
         getCode.setText(dateFormat.format(date)+String.format("%02d", code));
         getCode.setEnabled(false);
         baru.setEnabled(false);
-        jnsBarang.setEnabled(enable);
-        String text = dateFormat.format(date);
-//        }
+        jnsBarang.setEnabled(true);
+        tbBarang.setEnabled(true);
+        jhBrg.setEnabled(true);
+        gntBrg.setEnabled(true);
+        simpan.setEnabled(true);
+        batal.setEnabled(true);
     }//GEN-LAST:event_baruActionPerformed
  
     private void gntBrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gntBrgActionPerformed
-
         // Atribut & Variabel untuk mengganti/remove barang
         penjualan.getTabel().removeRow(tblBarang.getSelectedRow());
-        
     }//GEN-LAST:event_gntBrgActionPerformed
     
     private void jhBrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jhBrgActionPerformed
@@ -274,14 +266,12 @@ public class Transaksiframe extends javax.swing.JFrame {
     }//GEN-LAST:event_jhBrgActionPerformed
 
     private void batalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_batalActionPerformed
-
         // Syntax Buat Menganti/Cancel Semua data penjualan yang sudah di pesan/dipilih kembali menggulang ke awal
         new Transaksiframe().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_batalActionPerformed
 
     private void tbBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbBarangActionPerformed
-
         String[] data = new String[5];
         String name = null;
         double harga, jumlah = 0;
@@ -293,18 +283,13 @@ public class Transaksiframe extends javax.swing.JFrame {
         data[3]=barang.getName();
         jumlah=harga*jumlah;
         data[4]=String.valueOf(name);
-//        jnsBarang.setEnabled(false);
-//        tbBarang.setEnabled(false);
         penjualan.getTabel().addRow(data);
-        jnsBarang.setEnabled(enable);
-        tbBarang.setEnabled(enable);
     }//GEN-LAST:event_tbBarangActionPerformed
 
     private void simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanActionPerformed
-
-        //Menampilkan hasil yang di eksekusi
         
-        DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
+//Menampilkan hasil yang di eksekusi
+        DateFormat dateFormat = new SimpleDateFormat("yyMMdd");//Tanggal serta no pemesanan
         Date date = new Date();
         System.out.println(dateFormat.format(date));
         getCode.setText(dateFormat.format(date)+String.format("%02d", code));
@@ -316,8 +301,6 @@ public class Transaksiframe extends javax.swing.JFrame {
         code++;
         jhBrg.setText("");
         penjualan.getTabel().setRowCount(0);
-//        tbBarang.setEnabled(false);
-//        simpan.setEnabled(false);
     }//GEN-LAST:event_simpanActionPerformed
     /**
      * @param args the command line arguments
