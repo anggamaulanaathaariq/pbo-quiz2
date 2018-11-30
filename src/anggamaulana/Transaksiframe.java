@@ -284,6 +284,7 @@ public class Transaksiframe extends javax.swing.JFrame {
         jumlah=qty;
         data[2]=String.valueOf(name);
         
+        // Syntax double /duplicate agar membeli barang bisa dobel
         int tableRow = penjualan.getTableRow();
         if(tableRow == 0){
             penjualan.getTabel().addRow(new Object[]{barang.getName(), barang.getHarga(), jumlah});
