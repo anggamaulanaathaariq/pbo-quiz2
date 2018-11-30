@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.KeyEvent;
-import javax.swing.table.TableModel;
+
 /**
  *
  * @author Angga Maulana A
@@ -19,6 +19,7 @@ public class Transaksiframe extends javax.swing.JFrame {
     DateFormat dateFormat;
     Date date;
     Transaksi penjualan = new Transaksi();
+    boolean enable = true;
     DefaultTableModel tabel = new DefaultTableModel();
     /**
      * Creates new form Transaksiframe
@@ -27,9 +28,7 @@ public class Transaksiframe extends javax.swing.JFrame {
     public Transaksiframe() {
         initComponents();
         fillComboBarang();
-        
         tblBarang.setModel(penjualan.getTabel());
-   
     }
     //Method Daftar Barang dan Harga
     private void fillComboBarang(){
@@ -42,6 +41,9 @@ public class Transaksiframe extends javax.swing.JFrame {
         jnsBarang.addItem(barang3);
         
     }
+//    public boolean containsDuplicate(int[]x){
+//        
+//    }
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,6 +93,7 @@ public class Transaksiframe extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Transaksi");
 
+        jnsBarang.setEnabled(false);
         jnsBarang.setNextFocusableComponent(jhBrg);
         jnsBarang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,11 +215,12 @@ public class Transaksiframe extends javax.swing.JFrame {
                     .addComponent(baru, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tbBarang)
-                    .addComponent(jhBrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jnsBarang))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jnsBarang)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tbBarang)
+                        .addComponent(jhBrg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,14 +244,22 @@ public class Transaksiframe extends javax.swing.JFrame {
     private void baruActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baruActionPerformed
 
         // Atribut untuk mengeksekusi Code Tanggal 
-        code++;
+//        if (baru.getText().equals("New")){
+//            tbBarang.setEnabled(enable);
+//            getCode.setEnabled(false);
+//            jnsBarang.setEnabled(enable);
+//            jhBrg.setEnabled(enable);
+//            baru.setEnabled(false);
+        code++;//menampilkan date format serta no pembelian
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Date date = new Date();
         System.out.println(dateFormat.format(date));
         getCode.setText(dateFormat.format(date)+String.format("%02d", code));
         getCode.setEnabled(false);
         baru.setEnabled(false);
+        jnsBarang.setEnabled(enable);
         String text = dateFormat.format(date);
+//        }
     }//GEN-LAST:event_baruActionPerformed
  
     private void gntBrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gntBrgActionPerformed
@@ -281,20 +293,31 @@ public class Transaksiframe extends javax.swing.JFrame {
         data[3]=barang.getName();
         jumlah=harga*jumlah;
         data[4]=String.valueOf(name);
-        jnsBarang.setEnabled(false);
-        tbBarang.setEnabled(false);
+//        jnsBarang.setEnabled(false);
+//        tbBarang.setEnabled(false);
         penjualan.getTabel().addRow(data);
-        
+        jnsBarang.setEnabled(enable);
+        tbBarang.setEnabled(enable);
     }//GEN-LAST:event_tbBarangActionPerformed
 
     private void simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanActionPerformed
 
         //Menampilkan hasil yang di eksekusi
+        
+        DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
+        Date date = new Date();
+        System.out.println(dateFormat.format(date));
+        getCode.setText(dateFormat.format(date)+String.format("%02d", code));
         StringBuilder sb = new StringBuilder();
         sb.append("Kode: ").append(getCode.getText()).append("\n");
-        sb.append("Detail Belanja: ").append(penjualan.detailBarang());
+        sb.append("Detail Belanja: \n").append(penjualan.detailBarang());
         sb.append("Total: ").append(penjualan.countsubTotal()).append("\n");
         JOptionPane.showMessageDialog(this, sb, "Detail Transaksi",JOptionPane.INFORMATION_MESSAGE);
+        code++;
+        jhBrg.setText("");
+        penjualan.getTabel().setRowCount(0);
+//        tbBarang.setEnabled(false);
+//        simpan.setEnabled(false);
     }//GEN-LAST:event_simpanActionPerformed
     /**
      * @param args the command line arguments

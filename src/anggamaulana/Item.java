@@ -11,7 +11,7 @@ public class Item {
     private double harga;
     private String jumlah;
 
-    public Item(String name, int harga) {
+    public Item(String name, double harga) {
         this.name = name;
         this.harga = harga;
     }
