@@ -32,6 +32,11 @@ class Transaksi {
         return detailBarang;
    
     }
+    
+    public int getTableRow(){
+        return tabel.getRowCount();
+        
+    }
     //Gether & Setter Dari Class Transaksi / Atribut
     public double getDetailBarang() {
         return detailBarang;

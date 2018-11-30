@@ -274,16 +274,33 @@ public class Transaksiframe extends javax.swing.JFrame {
     private void tbBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbBarangActionPerformed
         String[] data = new String[5];
         String name = null;
-        double harga, jumlah = 0;
+        double harga; 
+        int qty, jumlah = 0;
         
         data[0]=barang.getName();
         harga=barang.getHarga();
         data[1]=String.valueOf(barang.getHarga());
-        data[2]=jhBrg.getText();
-        data[3]=barang.getName();
-        jumlah=harga*jumlah;
-        data[4]=String.valueOf(name);
-        penjualan.getTabel().addRow(data);
+        qty = Integer.parseInt(jhBrg.getText());
+        jumlah=qty;
+        data[2]=String.valueOf(name);
+        
+        int tableRow = penjualan.getTableRow();
+        if(tableRow == 0){
+            penjualan.getTabel().addRow(new Object[]{barang.getName(), barang.getHarga(), jumlah});
+        }else {
+            for(int i = 0; i < tableRow; i++){
+                if (penjualan.getTabel().getValueAt(i, 0).toString().equals(barang.getName())){
+                    penjualan.getTabel().setValueAt(Integer.parseInt(penjualan.getTabel().getValueAt(i, 2).toString()) + Integer.parseInt(jhBrg.getText()), i, 2);
+                    break;
+                } else {
+                    if (!penjualan.getTabel().getValueAt(tableRow - 1, 0).toString().equals(barang.getName()) && (i == tableRow - 1 )){
+                        penjualan.getTabel().addRow(new Object[]{ barang.getName(), barang.getHarga(), jhBrg.getText()});
+                        break;
+                    }
+                }
+            }
+        }
+        jnsBarang.requestFocus();
     }//GEN-LAST:event_tbBarangActionPerformed
 
     private void simpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_simpanActionPerformed
